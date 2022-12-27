@@ -12,7 +12,7 @@ public class Accounts {
 	
 	private List<GeneralUser> accs; 
 
-	Accounts() {
+public	Accounts() {
 		accs = new LinkedList<GeneralUser>();
 	}
 
@@ -23,6 +23,16 @@ public class Accounts {
 	{
 		return accs;
 	}
+	
+	public GeneralUser getUser(String username){ 
+		for(int i = 0 ; i<accs.size() ; i++){
+			if(accs.get(i).getUsername().equals(username) ){
+				return accs.get(i);
+			}
+		}
+		return null;
+	}
+	
 	
 	public GeneralUser getUser(GeneralUser user){ 
 		for(int i = 0 ; i<accs.size() ; i++){

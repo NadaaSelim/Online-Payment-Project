@@ -27,5 +27,9 @@ public class CreditCard implements PaymentMethod{
 			balance += amount;		
 	}
 
+	public double getBalance() {
+		return balance;
+	}
+
 	 
 }

@@ -12,7 +12,7 @@ public class GeneralUser extends User{
 		this.password = password;
 		this.email = email;
 		this.discount = new Discount(0.9,1);
-		wallet = new Wallet();
+		wallet = new Wallet(); card =null;
 		
 	}
 
@@ -41,6 +41,11 @@ public class GeneralUser extends User{
 		return card;
 	}
 
+	public String to_String() {
+		String str = "Username: "+username+"\nEmail: "+email +"\nWallet Balance: "+wallet.getBalance();
+		str+= (card!=null)?"\nCard Balance: "+card.getBalance():"";
+		return str;
+	}
 
 	public void setCard(CreditCard card) {
 		this.card = card;
