@@ -3,11 +3,11 @@ package phase2;
 import java.util.List;
 
 
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -17,7 +17,7 @@ import services.*;
 import Transactions.*;
 import Users.*;
 
-@SpringBootApplication
+
 @RestController
 @Component
 public class AdminController {
@@ -25,12 +25,14 @@ public class AdminController {
   
 	private Accounts accounts;
 	Catalog catalog;
-	TransactionsLog translog=TransactionsLog.getLog();
-	RefundRequestsLog rlog=RefundRequestsLog.getRefundLog();
+	TransactionsLog translog;
+	RefundRequestsLog rlog;
 	public AdminController() {
 //		this.accounts=accounts;
 //		this.catalog=catalog;
-			this.accounts=new Accounts();
+			accounts=Accounts.getInstance();
+			translog=TransactionsLog.getLog();
+			rlog=RefundRequestsLog.getRefundLog();
 		
 	}
 	
@@ -40,10 +42,10 @@ public class AdminController {
 	
 	/// case 1 -> add discount
 	/// case 1.1->add overall discount
-	@PostMapping("/addOverallDiscount/{factor}/{numberOftimestobeused}")
+	@PutMapping("/addOverallDiscount")
 	@ResponseBody
-	public String addOverallDiscount(@PathVariable Double factor,@PathVariable int numberOftimestobeused)  {
-		Discount overallDiscount=new Discount(factor,numberOftimestobeused);
+	public String addOverallDiscount( @RequestBody Discount overallDiscount )  {
+		
 		List<GeneralUser> accountsModify=accounts.getAccsTomodify();
 		if(accountsModify.isEmpty())
 			return "no users";
@@ -66,11 +68,15 @@ public class AdminController {
 	}
 	
 	/// case 2 -> list user transactions if list empty should be handled in boundary
-	public List<Transaction> listUserTransactions(String Username){
+	@GetMapping("/listUserTransactions/{username}")
+	@ResponseBody
+	public List<Transaction> listUserTransactions(@PathVariable String Username){
 		
 		return translog.listAllUserTrans(Username);
 	}
 	///case 3.1->list all refund requests and approve or reject
+	@GetMapping("/listRefundRequests")
+	@ResponseBody
 	public List<Transaction> listRefundRequests(){
 		
 		return rlog.getRequests();
@@ -78,22 +84,26 @@ public class AdminController {
 	
 	///case 3.2 ->accept or reject a request
 	///TODO commit
-	public boolean accept(int transnumber) {
+	@PutMapping("/accept/{transnumber}")
+	@ResponseBody
+	public String accept(@RequestBody int transnumber) {
 	
 		Transaction t=rlog.getRequests().get(transnumber-1);
 		t.getMethod().add(t.getAmount());
 		t.setRefunded(true);
 		rlog.removeRequest(t);
-		return true;
+		return "accepted";
 		
 	}
 	
-	public boolean reject(int transnumber) {
+	@PutMapping("/reject/{transnumber}")
+	@ResponseBody
+	public String reject(@RequestBody int transnumber) {
 		
 		Transaction t=rlog.getRequests().get(transnumber-1);
 		t.setRefunded(false);
 		rlog.removeRequest(t);
-		return true;
+		return "Rejected";
 		
 	}
 	
