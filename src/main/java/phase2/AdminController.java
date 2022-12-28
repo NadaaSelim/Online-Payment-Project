@@ -1,6 +1,15 @@
-package controllers;
+package phase2;
 
 import java.util.List;
+
+
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import Database.*;
 import Payment.*;
@@ -8,16 +17,20 @@ import services.*;
 import Transactions.*;
 import Users.*;
 
+@SpringBootApplication
+@RestController
+@Component
 public class AdminController {
 	
-;
-	Accounts accounts;
+  
+	private Accounts accounts;
 	Catalog catalog;
 	TransactionsLog translog=TransactionsLog.getLog();
 	RefundRequestsLog rlog=RefundRequestsLog.getRefundLog();
-	public AdminController(Accounts accounts,Catalog catalog) {
-		this.accounts=accounts;
-		this.catalog=catalog;
+	public AdminController() {
+//		this.accounts=accounts;
+//		this.catalog=catalog;
+			this.accounts=new Accounts();
 		
 	}
 	
@@ -27,16 +40,18 @@ public class AdminController {
 	
 	/// case 1 -> add discount
 	/// case 1.1->add overall discount
-	public boolean addOverallDiscount(Double factor,int numberOftimestobeused) throws Exception {
+	@PostMapping("/addOverallDiscount/{factor}/{numberOftimestobeused}")
+	@ResponseBody
+	public String addOverallDiscount(@PathVariable Double factor,@PathVariable int numberOftimestobeused)  {
 		Discount overallDiscount=new Discount(factor,numberOftimestobeused);
 		List<GeneralUser> accountsModify=accounts.getAccsTomodify();
 		if(accountsModify.isEmpty())
-			return false;
+			return "no users";
 		for(GeneralUser U:accountsModify)
 		{
 			U.setDiscount(overallDiscount);
 		}
-		return true;
+		return "discount added";
 		
 		
 	}
