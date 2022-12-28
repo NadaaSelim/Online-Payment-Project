@@ -1,11 +1,10 @@
 package services;
 
 
-public abstract class FormDecorator extends Form {
+public class FormDeco extends Form {
 
-	 protected Form form;
+	protected Form form;
 
-	public abstract void display();
 
 	public String searchForField(String fieldName){
 		if(this.fieldName == fieldName){

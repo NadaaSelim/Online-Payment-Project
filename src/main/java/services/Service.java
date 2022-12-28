@@ -6,16 +6,13 @@ public abstract class Service {
 		
 		protected String type;
 		protected String description;
-		protected Form form; 
 		protected Discount discount;
 		protected boolean COD; //to indicate of the service accepts cash
+		protected Form form;
 		
 		
 		public abstract boolean handle(GeneralUser user, PaymentMethod method);
 		
-		public void displayForm() throws Exception {
-			form.takeInput();
-		}
 
 		public String getType() {
 			return type;
@@ -48,5 +45,9 @@ public abstract class Service {
 
 		public void setCOD(boolean cOD) {
 			COD = cOD;
+		}
+		
+		public void setForm(Form form) {
+			this.form = form;
 		}
 }

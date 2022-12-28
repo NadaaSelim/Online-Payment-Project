@@ -21,19 +21,19 @@ public class Catalog {
 	}
 
 	public Catalog() {
-		servicesProviders[0] = new VodafoneMobile();
-		servicesProviders[1] = new EtisalatMobile();
-		servicesProviders[2] = new OrangeMobile();
-		servicesProviders[3] = new WeMobile();
-		servicesProviders[4] = new VodafoneInternet();
+		//servicesProviders[0] = new VodafoneMobile();
+		//servicesProviders[1] = new EtisalatMobile();
+		//servicesProviders[2] = new OrangeMobile();
+		//servicesProviders[3] = new WeMobile();
+		//servicesProviders[4] = new VodafoneInternet();
 		servicesProviders[5] = new EtisalatInternet();
-		servicesProviders[6] = new OrangeInternet();
-		servicesProviders[7] = new WeInternet();
-		servicesProviders[8] = new LandlineMonthly();
-		servicesProviders[9] = new LandlineQuarterly();
-		servicesProviders[10] = new DonationCancerHospital();
-		servicesProviders[11] = new DonationNGO();
-		servicesProviders[12] = new DonationSchools();
+		//servicesProviders[6] = new OrangeInternet();
+		//servicesProviders[7] = new WeInternet();
+		//servicesProviders[8] = new LandlineMonthly();
+		//servicesProviders[9] = new LandlineQuarterly();
+		//servicesProviders[10] = new DonationCancerHospital();
+		//servicesProviders[11] = new DonationNGO();
+		//servicesProviders[12] = new DonationSchools();
 	}
 	
 	//TODO move to UI
@@ -65,6 +65,16 @@ public class Catalog {
 			}
 		}
 		return list;
+	}
+	
+	public Service findExactMatch(String word){
+
+		for (int i = 0 ; i<servicesProviders.length; i++) {
+			if(servicesProviders[i].getDescription().equals(word)) {
+				return servicesProviders[i];
+			}
+		}
+		return null;
 	}
 
 	public Service[] getServicesProviders() {

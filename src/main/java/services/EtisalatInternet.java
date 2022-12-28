@@ -6,17 +6,18 @@ import Users.*;
 
 public class EtisalatInternet extends Service{
 	
+	
 	public EtisalatInternet() {
 		this.type = "Internet Payment";
 		this.description = "Etisalat Internet Payment";
 		this.discount  = new Discount();
 		this.COD = false;
-		this.form = new Form("LANDLINE");
-		this.form = new TextFieldDeco(this.form, "AMOUNT");
 	}
 
+	
 	@Override
 	public boolean handle(GeneralUser user, PaymentMethod method) {
+		
 		String amount = form.searchForField("AMOUNT");
 		if(amount.matches("[0-9]+") && form.searchForField("LANDLINE").matches("[0-9]+")){
 			double x = Double.parseDouble(amount);
