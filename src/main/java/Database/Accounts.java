@@ -11,8 +11,15 @@ import Users.*;
 public class Accounts {
 	
 	private List<GeneralUser> accs; 
+	private static Accounts instance;
+	
+	public static Accounts getInstance() {
+		if(instance == null)
+			instance = new Accounts();
+		return instance;
+	}
 
-public	Accounts() {
+	private	Accounts() {
 		accs = new LinkedList<GeneralUser>();
 	}
 

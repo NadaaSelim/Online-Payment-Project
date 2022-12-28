@@ -13,19 +13,13 @@ import Database.Accounts;
 import Payment.CreditCard;
 import Users.GeneralUser;
 
-@SpringBootApplication
 @RestController
 public class AccountController {
 	private Accounts accs;
 	
 
-	public AccountController() {accs = new Accounts();	
-	
-	//SpringApplication.run(FirstSpringAppApplication.class);
-	//test.FirstSpringAppApplication.main(null);
-	}
-	public AccountController(Accounts accs) {
-		this.accs = accs; 
+	public AccountController() {
+		this.accs = Accounts.getInstance(); 
 		//test.FirstSpringAppApplication.main(null);
 	}
 
@@ -47,8 +41,7 @@ public class AccountController {
 	}
 	
 
-	@PostMapping("signup/{username}/{email}/{password}")
-	@ResponseBody
+	@PostMapping("/signup/{username}/{email}/{password}")
 	public String signUp(@PathVariable String username, @PathVariable String email,@PathVariable String password) throws Exception {
 		List<GeneralUser> copy = accs.getAccs();
 		GeneralUser new_user = new GeneralUser(username, email, password);
