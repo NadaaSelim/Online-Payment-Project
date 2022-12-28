@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -20,6 +21,7 @@ import Users.*;
 
 @RestController
 @Component
+@RequestMapping("/Admin")
 public class AdminController {
 	
   
@@ -83,7 +85,6 @@ public class AdminController {
 	}
 	
 	///case 3.2 ->accept or reject a request
-	///TODO commit
 	@PutMapping("/accept/{transnumber}")
 	@ResponseBody
 	public String accept(@RequestBody int transnumber) {
