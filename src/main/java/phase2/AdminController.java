@@ -26,16 +26,15 @@ import Users.*;
 public class AdminController {
 	
   
-	private Accounts accounts;
-	Catalog catalog;
-	TransactionsLog translog;
-	RefundRequestsLog rlog;
+	private static Accounts accounts;
+	private static Catalog catalog;
+	private static TransactionsLog translog;
+	private static RefundRequestsLog rlog;
 	public AdminController() {
-//		this.accounts=accounts;
-//		this.catalog=catalog;
 			accounts=Accounts.getInstance();
 			translog=TransactionsLog.getLog();
 			rlog=RefundRequestsLog.getRefundLog();
+			catalog=new Catalog();
 		
 	}
 	
@@ -64,10 +63,17 @@ public class AdminController {
 	//// case 1.2 -> add specific discount for a certain service
 	/// throws exception if entered a wrong services description
 	/*will do web service after nada finishes*/
-	public void addSpecificDiscount(Double factor,int numberOftimestobeused, Service s ) 
+	
+	@PutMapping("/addSpecificDiscount/{serviceNumber}")
+	@ResponseBody
+	public String addSpecificDiscount(@RequestBody Discount specficDiscount , @PathVariable int serviceNumber ) 
 	{
-		Discount specficDiscount =new Discount(factor,numberOftimestobeused);
-		s.setDiscount(specficDiscount);
+		
+		Service[] servicesProviders=catalog.getServicesProviders();
+		if(serviceNumber<=0 || serviceNumber>servicesProviders.length)
+			return "Please Enter a Valid Service Number";
+		servicesProviders[serviceNumber-1].setDiscount(specficDiscount);
+		return "Discount added to "+servicesProviders[serviceNumber-1].getClass().getSimpleName()+" service";
 
 	}
 	
