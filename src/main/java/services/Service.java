@@ -6,6 +6,7 @@ public abstract class Service {
 		
 		protected String type;
 		protected String description;
+		protected String url;
 		protected Discount discount;
 		protected boolean COD; //to indicate of the service accepts cash
 		protected Form form;
@@ -53,5 +54,15 @@ public abstract class Service {
 		
 		public Form getForm() {
 			return form;
+		}
+
+
+		public String getUrl() {
+			return url;
+		}
+
+
+		public void setUrl(String url) {
+			this.url = url;
 		}
 }

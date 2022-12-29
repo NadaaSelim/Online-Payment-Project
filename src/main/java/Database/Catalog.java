@@ -9,7 +9,7 @@ import services.*;
 
 public class Catalog {
 	
-	private Service[] servicesProviders =  new Service[1]; //sould be 13
+	private Service[] servicesProviders =  new Service[13];
 	private String[] services = {"Mobile Recharge", "Internet Payment", "Landline", "Donation"};
 	
 	public String[] getServices() {
@@ -21,19 +21,19 @@ public class Catalog {
 	}
 
 	public Catalog() {
-		//servicesProviders[0] = new VodafoneMobile();
-		//servicesProviders[1] = new EtisalatMobile();
-		//servicesProviders[2] = new OrangeMobile();
-		//servicesProviders[3] = new WeMobile();
-		//servicesProviders[4] = new VodafoneInternet();
-		servicesProviders[0] = new EtisalatInternet(); // should be 5
-		//servicesProviders[6] = new OrangeInternet();
-		//servicesProviders[7] = new WeInternet();
-		//servicesProviders[8] = new LandlineMonthly();
-		//servicesProviders[9] = new LandlineQuarterly();
-		//servicesProviders[10] = new DonationCancerHospital();
-		//servicesProviders[11] = new DonationNGO();
-		//servicesProviders[12] = new DonationSchools();
+		servicesProviders[0] = new VodafoneMobile();
+		servicesProviders[1] = new EtisalatMobile();
+		servicesProviders[2] = new OrangeMobile();
+		servicesProviders[3] = new WeMobile();
+		servicesProviders[4] = new VodafoneInternet();
+		servicesProviders[5] = new EtisalatInternet();
+		servicesProviders[6] = new OrangeInternet();
+		servicesProviders[7] = new WeInternet();
+		servicesProviders[8] = new LandlineMonthly();
+		servicesProviders[9] = new LandlineQuarterly();
+		servicesProviders[10] = new DonationCancerHospital();
+		servicesProviders[11] = new DonationNGO();
+		servicesProviders[12] = new DonationSchools();
 	}
 	
 	//TODO move to UI
@@ -70,7 +70,7 @@ public class Catalog {
 	public Service findExactMatch(String word){
 
 		for (int i = 0 ; i<servicesProviders.length; i++) {
-			if(servicesProviders[i].getDescription().equals(word)) {
+			if(servicesProviders[i].getUrl().equals(word)) {
 				return servicesProviders[i];
 			}
 		}
