@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -44,6 +45,7 @@ public class AdminController {
 	
 	/// case 1 -> add discount
 	/// case 1.1->add overall discount
+	/*working web service*/
 	@PutMapping("/addOverallDiscount")
 	@ResponseBody
 	public String addOverallDiscount( @RequestBody Discount overallDiscount )  {
@@ -61,7 +63,7 @@ public class AdminController {
 	}
 	//// case 1.2 -> add specific discount for a certain service
 	/// throws exception if entered a wrong services description
-	///TODO modify (display list of all possible services)
+	/*will do web service after nada finishes*/
 	public void addSpecificDiscount(Double factor,int numberOftimestobeused, Service s ) 
 	{
 		Discount specficDiscount =new Discount(factor,numberOftimestobeused);
@@ -70,13 +72,15 @@ public class AdminController {
 	}
 	
 	/// case 2 -> list user transactions if list empty should be handled in boundary
-	@GetMapping("/listUserTransactions/{username}")
+	/*working*/
+	@GetMapping("/listUserTransactions/{Username}")
 	@ResponseBody
 	public List<Transaction> listUserTransactions(@PathVariable String Username){
-		
-		return translog.listAllUserTrans(Username);
+		List<Transaction> usertranscations=translog.listAllUserTrans(Username);
+		return usertranscations;
 	}
 	///case 3.1->list all refund requests and approve or reject
+	/*working*/
 	@GetMapping("/listRefundRequests")
 	@ResponseBody
 	public List<Transaction> listRefundRequests(){
@@ -87,9 +91,19 @@ public class AdminController {
 	///case 3.2 ->accept or reject a request
 	@PutMapping("/accept/{transnumber}")
 	@ResponseBody
-	public String accept(@RequestBody int transnumber) {
+	public String accept(@PathVariable int transnumber) {
 	
+		if(rlog.isEmpty())
+			return "NO refund Requests at the moment";
+		
+		if(transnumber<=0 || transnumber>rlog.getRequests().size())
+			return"Please Enter a valid number";
+			
+
+		
 		Transaction t=rlog.getRequests().get(transnumber-1);
+		
+		
 		t.getMethod().add(t.getAmount());
 		t.setRefunded(true);
 		rlog.removeRequest(t);
@@ -99,9 +113,19 @@ public class AdminController {
 	
 	@PutMapping("/reject/{transnumber}")
 	@ResponseBody
-	public String reject(@RequestBody int transnumber) {
+	public String reject(@PathVariable  int transnumber) {
 		
+		if(rlog.isEmpty())
+			return "NO refund Requests at the moment";
+		
+		if(transnumber<=0 || transnumber>rlog.getRequests().size())
+			return"Please Enter a valid number";
+		
+	
+	
 		Transaction t=rlog.getRequests().get(transnumber-1);
+		
+		
 		t.setRefunded(false);
 		rlog.removeRequest(t);
 		return "Rejected";

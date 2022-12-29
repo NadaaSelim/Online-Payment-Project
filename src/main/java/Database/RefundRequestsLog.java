@@ -36,4 +36,11 @@ public class RefundRequestsLog {
     public void removeRequest(Transaction trans) {
     	requests.remove(trans);
     }
+    public boolean isEmpty()
+    {
+    	if(requests.isEmpty())
+    		return true;
+    	else
+    		return false;
+    }
 }
