@@ -22,8 +22,8 @@ public class PayForServiceController {
 	Catalog c = new Catalog();
 
 	@PostMapping(value = "/{username}/{serviceSelection}/{method}")
-	public String payForService(@PathVariable("username") String username, @PathVariable("serviceSelection") String serviceSelection, @PathVariable("method") String method, @RequestBody Form form) {
-		Accounts accs = new Accounts();
+	public String payForService(@PathVariable("username") String username, @PathVariable("serviceSelection") String serviceSelection, @PathVariable("method") String method, @RequestBody FormDeco form) {
+		Accounts accs = Accounts.getInstance();
 		GeneralUser user = accs.getUser(username);
 		if (user == null) {
 			return "User does not exist";
@@ -34,7 +34,11 @@ public class PayForServiceController {
 			return "The service you are trying to access does not exist";
 		}
 		
+		
 		service.setForm(form);
+		if(form == null ) {
+			return "the input is incorrect";
+		}
 		
 		method =  method.toLowerCase();
 		if(method.equals("creditcard")) {
@@ -57,6 +61,7 @@ public class PayForServiceController {
 		}
 		
 		return "Transaction Failed";
+
 		
 	}
 	

@@ -50,4 +50,8 @@ public abstract class Service {
 		public void setForm(Form form) {
 			this.form = form;
 		}
+		
+		public Form getForm() {
+			return form;
+		}
 }

@@ -12,13 +12,14 @@ public class EtisalatInternet extends Service{
 		this.description = "Etisalat Internet Payment";
 		this.discount  = new Discount();
 		this.COD = false;
+		this.form = new Form();
 	}
 
 	
 	@Override
 	public boolean handle(GeneralUser user, PaymentMethod method) {
 		
-		String amount = form.searchForField("AMOUNT");
+		String amount = String.valueOf(form.searchForField("AMOUNT"));
 		if(amount.matches("[0-9]+") && form.searchForField("LANDLINE").matches("[0-9]+")){
 			double x = Double.parseDouble(amount);
 			Double value = x*discount.use()*user.getDiscount().use();

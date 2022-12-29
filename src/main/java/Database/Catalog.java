@@ -9,7 +9,7 @@ import services.*;
 
 public class Catalog {
 	
-	private Service[] servicesProviders =  new Service[13];
+	private Service[] servicesProviders =  new Service[1]; //sould be 13
 	private String[] services = {"Mobile Recharge", "Internet Payment", "Landline", "Donation"};
 	
 	public String[] getServices() {
@@ -26,7 +26,7 @@ public class Catalog {
 		//servicesProviders[2] = new OrangeMobile();
 		//servicesProviders[3] = new WeMobile();
 		//servicesProviders[4] = new VodafoneInternet();
-		servicesProviders[5] = new EtisalatInternet();
+		servicesProviders[0] = new EtisalatInternet(); // should be 5
 		//servicesProviders[6] = new OrangeInternet();
 		//servicesProviders[7] = new WeInternet();
 		//servicesProviders[8] = new LandlineMonthly();
