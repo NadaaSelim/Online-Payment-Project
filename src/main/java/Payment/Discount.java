@@ -17,6 +17,14 @@ public class Discount {
 
 	
 	
+	public void setFactor(double factor) {
+		this.factor = factor;
+	}
+
+	public void setCounter(int counter) {
+		this.counter = counter;
+	}
+
 	public Discount(double factor, int counter) {
 		this.factor = factor;
 		this.counter = counter;

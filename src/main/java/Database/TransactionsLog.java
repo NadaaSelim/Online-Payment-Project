@@ -28,10 +28,12 @@ public class TransactionsLog {
     public List<Transaction> listUserTrans(GeneralUser user){
         List<Transaction> res= new LinkedList<Transaction>();
         for(Transaction trans : log){
-            if(trans.getUser() == user){ res.add(trans); }
+            if(trans.getUser().equals(user)){ res.add(trans); }
         }
         return res;
     }
+    
+    
     public List<Transaction> listAllUserTrans(String username){
         List<Transaction> res= new LinkedList<Transaction>();
         for(Transaction trans : log){
