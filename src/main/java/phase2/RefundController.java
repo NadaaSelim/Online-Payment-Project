@@ -32,7 +32,7 @@ public class RefundController {
 		GeneralUser user = (Accounts.getInstance()).getUser(username);
 		if(user == null) {return "Invalid username";}
 		List<Transaction> transactions = Translog.listUserTrans(user);
-		String res ="All User Transaction\n"; int num=1;
+		String res ="All Refundable User Transaction\n"; int num=1;
 		for (Transaction trans : transactions) {
 			if (trans instanceof RefundTransaction || trans.isRefunded() || trans.isRefundRequested())
 				continue;

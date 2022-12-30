@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -26,16 +27,14 @@ public class AccountController {
 		//test.FirstSpringAppApplication.main(null);
 	}
 
-	@GetMapping("login/{username}/{email}/{password}")
-	@ResponseBody	
-	public String LogIn(@PathVariable String username, @PathVariable String email,@PathVariable String password) {
+	@GetMapping("/login")
+	public String LogIn(@RequestBody GeneralUser user) {
 		List<GeneralUser> copy = accs.getAccs();
-		GeneralUser new_user = new GeneralUser(username, email, password);
 		if (copy.isEmpty()) {
 			return "\nUSER DOES NOT EXIST. TRY AGAIN\n";
 		}
-		else if(accs.getUser(new_user) != null){
-			GeneralUser usr= accs.getUser(new_user);
+		else if(accs.getUser(user) != null){
+			GeneralUser usr= accs.getUser(user);
 			return "LOGIN SUCCESSFUL\n"+usr.to_String();
 		}
 		else {
@@ -44,13 +43,11 @@ public class AccountController {
 	}
 	
 
-	@PostMapping("/signup/{username}/{email}/{password}")
-	public String signUp(@PathVariable String username, @PathVariable String email,@PathVariable String password) throws Exception {
+	@PostMapping("/signup")
+	public String signUp(@RequestBody GeneralUser new_user)  {
 		List<GeneralUser> copy = accs.getAccs();
-		GeneralUser new_user = new GeneralUser(username, email, password);
 		if ( copy.isEmpty()) {
-			accs.addUser(new_user); //System.out.print(new_user.to_String());
-			//return "SIGN UP SUCCESSFUL";
+			accs.addUser(new_user);			
 			return ("SIGN UP SUCCESSFUL\n"+new_user.to_String());	
 		}
 		
@@ -62,12 +59,12 @@ public class AccountController {
 		return "SIGN UP SUCCESSFUL\n"+new_user.to_String();
 	}
 	
-	@PutMapping("/addCard/{username}/{cardNum}/{pin}/{balance}")
+	@PutMapping("/addCard/{username}")
 	@ResponseBody
-	public String addCardInfo(@PathVariable String username,@PathVariable int cardNum,@PathVariable int pin,@PathVariable double balance) {
+	public String addCardInfo(@PathVariable String username,@RequestBody CreditCard card) {
 		GeneralUser user = accs.getUser(username);
 		if(user == null) {return "Invalid Username.Try Again";}
-		user.setCard(new CreditCard(cardNum,pin,balance));
+		user.setCard(card);
 		return "CARD ADDED\n"+user.to_String();		
 	}
 
