@@ -3,6 +3,7 @@ package phase2;
 import java.util.ArrayList;
 
 
+
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,6 +15,7 @@ import Database.*;
 
 import services.*;
 import Users.*;
+import Payment.*;
 
 @SpringBootApplication
 @RestController
@@ -54,7 +56,8 @@ public class PayForServiceController {
 			return "Transaction Failed";
 		}
 		else if (method.equals("cod") && service.isCOD()) {
-			if(service.handle(user, user.getWallet())) {
+			Cash cod = new Cash();
+			if(service.handle(user, cod)) {
 				return "Transaction Successful";
 			}
 			return "Transaction Failed";
