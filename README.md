@@ -23,3 +23,9 @@ if that didn't work  :sweat_smile:
 :arrow_right: goals : spring-boot:run
                     
 :arrow_right: Click on run
+
+# :warning: Extra INFO about the project
+
+:point_right: Java 17
+
+:point_right: Spring boot 3
