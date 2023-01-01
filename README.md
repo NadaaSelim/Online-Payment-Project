@@ -10,7 +10,7 @@
 
 5-click on the Run Icon :arrow_forward: choose run as java Application Phase2Application  
 
-if that didn't work 
+if that didn't work  :sweat_smile:
 
 :arrow_right: click Run Configurations
 
