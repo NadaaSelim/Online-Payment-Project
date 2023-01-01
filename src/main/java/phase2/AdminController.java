@@ -62,8 +62,7 @@ public class AdminController {
 	}
 	//// case 1.2 -> add specific discount for a certain service
 	/// throws exception if entered a wrong services description
-	/*will do web service after nada finishes*/
-	
+	/*works*/
 	@PutMapping("/addSpecificDiscount/{serviceNumber}")
 	@ResponseBody
 	public String addSpecificDiscount(@RequestBody Discount specficDiscount , @PathVariable int serviceNumber ) 
