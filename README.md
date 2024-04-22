@@ -41,4 +41,4 @@ if that didn't work  :sweat_smile:
 
 :point_right: Spring boot 3
 
-👉 Postman Collection with all services: https://galactic-astronaut-165347.postman.co/workspace/New-Team-Workspace~02279b61-a7b6-4085-9d2a-5287f71e98d9/collection/25087770-7b88f25c-8828-4537-8816-6b55b7fe2520?action=share&creator=25087770
+👉 [Postman Collection with all services]https://galactic-astronaut-165347.postman.co/workspace/New-Team-Workspace~02279b61-a7b6-4085-9d2a-5287f71e98d9/collection/25087770-7b88f25c-8828-4537-8816-6b55b7fe2520?action=share&creator=25087770
