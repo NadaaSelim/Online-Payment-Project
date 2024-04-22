@@ -1,4 +1,15 @@
-# SCS352_S6_Phase2_20206115_20206159_20206055
+# Online Payment System
+## Description:
+An Online Payment Application that offers the following features using REST Services: 
+1- Register/Login 
+2- Mobile Recharge 
+3- Internet Payment 
+4- Donations 
+5- Landline Bills 
+6- Add Money to Wallet 
+7- Refund 
+8- List All UserTransaction 
+9- Accept/Refuse Refunds as Admin
 # :red_circle: How to build the project
 1-choose file from the toolbar
 
@@ -24,8 +35,10 @@ if that didn't work  :sweat_smile:
                     
 :arrow_right: Click on run
 
-# :warning: Extra INFO about the project
+# 🔵: Extra INFO about the project
 
 :point_right: Java 17
 
 :point_right: Spring boot 3
+
+👉 Postman Collection with all services: https://galactic-astronaut-165347.postman.co/workspace/New-Team-Workspace~02279b61-a7b6-4085-9d2a-5287f71e98d9/collection/25087770-7b88f25c-8828-4537-8816-6b55b7fe2520?action=share&creator=25087770
